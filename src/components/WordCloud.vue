@@ -85,7 +85,13 @@ const props = {
   wordClick: {
     type: Function,
     default: null
-  }
+  },
+  tooltipContent: {
+    type: Array,
+    default: function (nameKey, valueKey, d) {
+      return nameKey + ': ' + d[nameKey] + "<br/>"  + valueKey + ': ' + d[valueKey]
+    }
+  },
 }
 
 export default {
@@ -229,7 +235,7 @@ export default {
                 tooltip.transition()
                     .duration(200)
                     .style("opacity", .7)
-                tooltip.html(nameKey + ': ' + d[nameKey] + "<br/>"  + valueKey + ': ' + d[valueKey])
+                tooltip.html(vm.tooltipContent(nameKey, valueKey, d))
             })
             .on("mousemove", function(d) {
                 tooltip
